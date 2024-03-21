@@ -16,6 +16,9 @@ const int ITER = 10;
 void memset_loop(char *addr, char value, size_t len);
 void memset_fsrm(char *addr, char value, size_t len);
 void memset_avx2(char *addr, char value, size_t len);
+void memset_avx2_nt(char *addr, char value, size_t len);
+void memset_avx2_nt_st(char *addr, char value, size_t len);
+void memset_clzero(char *addr, char value, size_t len);
 
 unsigned long long diff_timespec(struct timespec *start, struct timespec *end) {
   return ((unsigned long long)(end->tv_sec - start->tv_sec)) * 1000000000 +
@@ -38,7 +41,7 @@ void bench(void (*f)(char *, char, size_t), char *addr, char value,
   }
 
   unsigned long long ns_to_ms = 1000000;
-  printf(":   %5llums   %5llums   %5llums   %7.2f GB/s\n", min / ns_to_ms,
+  printf("    %5llums   %5llums   %5llums   %7.2f GB/s\n", min / ns_to_ms,
          avg / ns_to_ms, max / ns_to_ms, ((double)len) / ((double)avg));
 }
 
@@ -51,13 +54,19 @@ int main(int argc, char *argv[]) {
   printf("[*] pre-faulted 4GiB of memory.\n");
   printf("[*] running %d iterations per method...\n", ITER);
 
-  printf("                       min       avg       max       avg GB/s\n");
-  printf("    memset_loop");
+  printf("                           min       avg       max       avg GB/s\n");
+  printf("  memset_loop      ");
   bench(memset_loop, addr, 0, map_size);
-  printf("    memset_fsrm");
+  printf("  memset_fsrm      ");
   bench(memset_fsrm, addr, 0, map_size);
-  printf("    memset_avx2");
+  printf("  memset_avx2      ");
   bench(memset_avx2, addr, 0, map_size);
+  printf("  memset_avx2_nt   ");
+  bench(memset_avx2_nt, addr, 0, map_size);
+  printf("  memset_avx2_nt_st");
+  bench(memset_avx2_nt_st, addr, 0, map_size);
+  printf("  memset_clzero    ");
+  bench(memset_clzero, addr, 0, map_size);
 
   munmap((void *)addr, map_size);
 }
