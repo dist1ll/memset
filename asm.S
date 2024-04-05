@@ -4,7 +4,6 @@
 .globl memset_fsrm
 .globl memset_avx2
 .globl memset_avx2_nt
-.globl memset_avx2_nt_st
 .globl memset_clzero
 
 
@@ -50,26 +49,6 @@ memset_avx2_nt:
         addq rdi, 32
         subq rdx, 32
         jnz ._avx2_nt
-        ret
-
-.align 4096
-memset_avx2_nt_st:
-        vpxor xmm0, xmm0, xmm0
-        vpinsrb xmm0, xmm0, rsi, 0
-        vpbroadcastb ymm0, xmm0
-        xorq r8, r8
-._avx2_nt_st:
-        vmovntdq ymmword ptr [rdi], ymm0
-        vmovntdq ymmword ptr [rdi + 0x100000], ymm0
-        addq r8, 32
-        cmp r8, 0x100000
-        jne ._avx2_nt_st_skip
-        addq rdi, 0x100000
-        xorq r8, r8
-._avx2_nt_st_skip:
-        addq rdi, 32
-        subq rdx, 64
-        jnz ._avx2_nt_st
         ret
 
 .align 4096
