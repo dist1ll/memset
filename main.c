@@ -17,6 +17,7 @@
 const int ITER = 5;
 const size_t MAP_SIZE = ((size_t)1) << 32;
 
+#define MADV_POPULATE_WRITE 23
 /* All following functions assume len is page-aligned.  */
 void memset_loop(char *addr, char value, size_t len);
 void memset_fsrm(char *addr, char value, size_t len);
