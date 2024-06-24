@@ -1,0 +1,44 @@
+Example output for AMD Milan system:
+
+dist1ll@sys:~/memset$ ./a.out
+[*] pre-faulted 4GiB of memory.
+[*] running 5 iterations per method...
+  THREADS=1                min       avg       max       avg GB/s
+  -----------            -----     -----     -----     ----------
+  memset_loop            295ms     296ms     297ms     14.50 GB/s
+  memset_fsrm            393ms     394ms     395ms     10.89 GB/s
+  memset_avx2            300ms     301ms     301ms     14.25 GB/s
+  memset_avx2_nt         123ms     123ms     124ms     34.76 GB/s
+  memset_clzero          122ms     124ms     125ms     34.59 GB/s
+
+  THREADS=2                min       avg       max       avg GB/s
+  -----------            -----     -----     -----     ----------
+  memset_loop            152ms     155ms     165ms     27.60 GB/s
+  memset_fsrm            200ms     201ms     201ms     21.36 GB/s
+  memset_avx2            159ms     159ms     160ms     26.88 GB/s
+  memset_avx2_nt          62ms      62ms      63ms     68.89 GB/s
+  memset_clzero           61ms      61ms      62ms     69.32 GB/s
+
+  THREADS=4                min       avg       max       avg GB/s
+  -----------            -----     -----     -----     ----------
+  memset_loop            111ms     113ms     114ms     37.99 GB/s
+  memset_fsrm            105ms     111ms     119ms     38.36 GB/s
+  memset_avx2             87ms      93ms     113ms     46.07 GB/s
+  memset_avx2_nt          31ms      48ms      59ms     88.51 GB/s
+  memset_clzero           31ms      31ms      32ms    134.87 GB/s
+
+  THREADS=8                min       avg       max       avg GB/s
+  -----------            -----     -----     -----     ----------
+  memset_loop             54ms      62ms      66ms     69.15 GB/s
+  memset_fsrm             59ms      60ms      61ms     71.09 GB/s
+  memset_avx2             54ms      55ms      56ms     77.27 GB/s
+  memset_avx2_nt          18ms      20ms      25ms    213.78 GB/s
+  memset_clzero           18ms      19ms      19ms    225.18 GB/s
+
+  THREADS=16               min       avg       max       avg GB/s
+  -----------            -----     -----     -----     ----------
+  memset_loop             54ms      55ms      57ms     76.92 GB/s
+  memset_fsrm             53ms      53ms      54ms     79.63 GB/s
+  memset_avx2             49ms      52ms      53ms     82.35 GB/s
+  memset_avx2_nt          20ms      21ms      26ms    196.73 GB/s
+  memset_clzero           20ms      20ms      20ms    210.86 GB/s
