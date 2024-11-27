@@ -1,3 +1,9 @@
+Clears 4GiB of pre-faulted memory from 1, 2, 4, 8 and 16 threads.
+
+Requirements:
+  - Linux
+  - x86-64 CPU with clzero
+
 Example output for AMD Milan system:
 
 dist1ll@sys:~/memset$ ./a.out
