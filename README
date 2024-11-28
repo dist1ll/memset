@@ -6,7 +6,7 @@ Requirements:
 
 Example output for AMD Milan system:
 
-dist1ll@sys:~/memset$ ./a.out
+dist1ll@sys:~/memset$ ./memset
 [*] pre-faulted 4GiB of memory.
 [*] running 5 iterations per method...
   THREADS=1                min       avg       max       avg GB/s
@@ -48,3 +48,29 @@ dist1ll@sys:~/memset$ ./a.out
   memset_avx2             49ms      52ms      53ms     82.35 GB/s
   memset_avx2_nt          20ms      21ms      26ms    196.73 GB/s
   memset_clzero           20ms      20ms      20ms    210.86 GB/s
+
+Output for Intel i5-9600k (Coffee Lake) (modified, removed clzero)
+
+dist1ll@sys:~/memset$ ./memset
+[*] pre-faulted 4GiB of memory.
+[*] running 5 iterations per method...
+  THREADS=1                min       avg       max       avg GB/s
+  -----------            -----     -----     -----     ----------
+  memset_loop            276ms     276ms     276ms     15.51 GB/s
+  memset_fsrm            181ms     182ms     183ms     23.57 GB/s
+  memset_avx2            270ms     270ms     271ms     15.85 GB/s
+  memset_avx2_nt         115ms     115ms     115ms     37.28 GB/s
+
+  THREADS=2                min       avg       max       avg GB/s
+  -----------            -----     -----     -----     ----------
+  memset_loop            236ms     236ms     236ms     18.15 GB/s
+  memset_fsrm            109ms     110ms     110ms     39.04 GB/s
+  memset_avx2            238ms     238ms     238ms     18.00 GB/s
+  memset_avx2_nt          92ms      93ms      93ms     46.17 GB/s
+
+  THREADS=4                min       avg       max       avg GB/s
+  -----------            -----     -----     -----     ----------
+  memset_loop            254ms     255ms     255ms     16.82 GB/s
+  memset_fsrm            152ms     154ms     155ms     27.86 GB/s
+  memset_avx2            254ms     254ms     255ms     16.87 GB/s
+  memset_avx2_nt          93ms      93ms      94ms     45.70 GB/s
